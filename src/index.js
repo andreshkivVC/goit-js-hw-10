@@ -40,42 +40,27 @@ function createCountryList(countries) {
     .join('');
   contryListRef.innerHTML = '';
   contryListRef.insertAdjacentHTML('beforebegin', markupCountriesList);
-}
 
-function render(countryData) {
-  contryListRef.innerHTML = '';
-  const DataEl = countryData
-    .map(
-      ({ name: { official }, flags: { svg } }) =>
-        `<li class="country"><img src="${svg}"
-      alt="Flag of ${official}" />
-      <h2>${official}</h2>
-      </li>`
-    )
-    .join('');
-
-  console.log(countryData.length);
-
-  contryListRef.insertAdjacentHTML('beforeend', DataEl);
-  contryInfoRef.innerHTML = '';
-
-  if (countryData.length === 1) {
+  if (countries.length === 1) {
     contryInfoRef.innerHTML = '';
-    const DataOneEl = countryData.map(
+    const DataOneEl = countries.map(
       ({ name, flags, capital, population, languages }) =>
-        `<li class="country"><img src="${svg}"
-      alt="Flag of ${official}" />
-      <h1>${official}</h1>
-      </li>
-    <p class="text"><b>Capital:</b>${capital}</p>;
-    <p class="text"><b>Population:</b>${population}</p>;
-    <p class="text"><b>Languages:</b>${languages}</p>;
+        `<li class="country">
+        <img width="40" heinght="40" src="${flags.svg}"   
+        alt="Flag of ${name.official}"/>
+        <h1>${name.official}</h1>
+        </li> 
+    <p class="text"><b>Capital: </b>${capital}</p>
+    <p class="text"><b>Population: </b>${population}</p>
+    <p class="text"><b>Languages: </b>${languages}</p>
       `
     );
     contryInfoRef.insertAdjacentHTML('beforeend', DataOneEl.join(''));
     contryListRef.innerHTML = '';
-  } else if (countryData.length > 10) {
+  } else if (countries.length > 10) {
     Notify.info('Too many matches found. Please enter a more specific name.');
     contryListRef = '';
   }
 }
+
+
