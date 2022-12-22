@@ -1,8 +1,10 @@
-const endPoint = 'https://restcountries.com/v3.1/name/';
-const filter = '?fields=name,capital,population,flags,languages';
-
-export default function fetchCountries(name) {
-  return fetch(`${endPoint}${name}${filter}`).then(res => {
-    return res.json();
+export function fetchCountries(findCountry) {
+  return fetch(
+    `https://restcountries.com/v3.1/name/${findCountry}?fields=name,capital,population,flags,languages`
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
   });
 }
